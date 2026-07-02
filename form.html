@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My Form</title>
+        <style>
+            :root {
+                --glass-color: rgba(255, 255, 255, 0.18);
+                --glass-border: rgba(255, 255, 255, 0.45);
+                --text-color: #ffffff;
+                --accent: #9be7ff;
+                --shadow: 0 25px 80px rgba(0, 0, 0, 0.18);
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                min-height: 100vh;
+                margin: 0;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                color: var(--text-color);
+                background: radial-gradient(circle at top left, rgba(45, 120, 255, 0.42), transparent 28%),
+                            radial-gradient(circle at bottom right, rgba(153, 63, 255, 0.35), transparent 28%),
+                            linear-gradient(135deg, #0f172a 0%, #111827 35%, #0f172a 100%);
+                display: grid;
+                place-items: center;
+                padding: 32px;
+            }
+
+            .page-title {
+                margin: 0 0 16px;
+                font-size: clamp(1.8rem, 2.4vw, 2.8rem);
+                text-align: center;
+                letter-spacing: 0.04em;
+                text-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            }
+
+            .glass-card {
+                width: min(720px, 100%);
+                padding: 36px 32px;
+                border-radius: 28px;
+                background: var(--glass-color);
+                border: 1px solid var(--glass-border);
+                box-shadow: var(--shadow);
+                backdrop-filter: blur(18px);
+                -webkit-backdrop-filter: blur(18px);
+                overflow: hidden;
+                position: relative;
+            }
+
+            .glass-card::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.18), transparent 38%),
+                            radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.12), transparent 28%);
+                pointer-events: none;
+            }
+
+            .glass-card > * {
+                position: relative;
+                z-index: 1;
+            }
+
+            form {
+                display: grid;
+                gap: 18px;
+            }
+
+            label {
+                display: block;
+                font-weight: 600;
+                margin-bottom: 8px;
+                opacity: 0.95;
+            }
+
+            input[type="text"],
+            input[type="password"],
+            input[type="email"],
+            input[type="tel"],
+            input[type="date"],
+            input[type="file"],
+            select,
+            textarea {
+                width: 100%;
+                padding: 14px 16px;
+                border-radius: 18px;
+                border: 1px solid rgba(255, 255, 255, 0.35);
+                background: rgba(255, 255, 255, 0.12);
+                color: var(--text-color);
+                font-size: 1rem;
+                outline: none;
+                transition: border-color 0.2s ease, transform 0.2s ease;
+            }
+
+            input:focus,
+            select:focus,
+            textarea:focus {
+                border-color: var(--accent);
+                box-shadow: 0 0 0 4px rgba(155, 231, 255, 0.14);
+                transform: translateY(-1px);
+            }
+
+            fieldset {
+                margin: 0;
+                padding: 0;
+                border: none;
+            }
+
+            .option-group {
+                display: grid;
+                gap: 14px;
+                padding: 18px 20px;
+                border-radius: 22px;
+                background: rgba(255, 255, 255, 0.08);
+                border: 1px solid rgba(255, 255, 255, 0.18);
+            }
+
+            .radio-row {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 12px 18px;
+                align-items: center;
+            }
+
+            .radio-row label {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                white-space: nowrap;
+            }
+
+            .checkbox-row {
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .checkbox-row input {
+                width: auto;
+                transform: translateY(1px);
+            }
+
+            .button-group {
+                display: grid;
+                gap: 14px;
+            }
+
+            input[type="reset"],
+            input[type="submit"] {
+                width: 100%;
+                padding: 14px 16px;
+                border: none;
+                border-radius: 18px;
+                font-size: 1rem;
+                font-weight: 700;
+                cursor: pointer;
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+            }
+
+            input[type="submit"] {
+                background: linear-gradient(135deg, rgba(155, 231, 255, 0.95), rgba(96, 165, 250, 0.95));
+                color: #0f172a;
+            }
+
+            input[type="reset"] {
+                background: rgba(255, 255, 255, 0.12);
+                color: #ffffff;
+            }
+
+            input[type="reset"]:hover,
+            input[type="submit"]:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 18px 35px rgba(0, 0, 0, 0.18);
+            }
+
+            .hidden-field {
+                display: none;
+            }
+
+            @media (max-width: 600px) {
+                .glass-card {
+                    padding: 28px 22px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <section class="glass-card">
+            <h1 class="page-title">Glassmorphism Form</h1>
+            <form action="https://formsubmit.co/danstine7788@gmail.com" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="_subject" value="New form submission">
+                <input type="hidden" name="_template" value="table">
+                <input class="hidden-field" type="text" name="_honey">
+                <div>
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="freaky" minlength="4" required>
+                </div>
+                <div>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" minlength="6" required>
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="tetra123@gmail.com" required>
+                </div>
+                <div>
+                    <label for="phone">Phone #</label>
+                    <input type="tel" id="phone" name="phone" placeholder="8976543214" pattern="[0-9]{10}" required>
+                </div>
+                <div>
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" id="dob" name="dob" required>
+                </div>
+                <fieldset class="option-group">
+                    <legend style="font-weight:700; opacity:0.85;">Gender</legend>
+                    <div class="radio-row">
+                        <label><input type="radio" id="male" name="gender" value="male" required>Male</label>
+                        <label><input type="radio" id="female" name="gender" value="female" required>Female</label>
+                        <label><input type="radio" id="other" name="gender" value="other" required>Other</label>
+                    </div>
+                </fieldset>
+                <div>
+                    <label for="title">Title</label>
+                    <select id="title" name="title" required>
+                        <option value="">Select a title</option>
+                        <option value="mr">Mr.</option>
+                        <option value="mrs">Mrs.</option>
+                        <option value="ms">Ms.</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="file">File</label>
+                    <input type="file" id="file" name="attachment" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg,.mp3,.mp4">
+                </div>
+                <div>
+                    <label for="feedback">Feedback</label>
+                    <textarea id="feedback" name="feedback" rows="4" placeholder="Please provide your feedback..."></textarea>
+                </div>
+                <div class="checkbox-row">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">I agree to the terms and conditions</label>
+                </div>
+                <div class="button-group">
+                    <input type="reset" value="Reset">
+                    <input type="submit" value="Submit">
+                </div>
+            </form>
+        </section>
+    </body>
+</html>        
